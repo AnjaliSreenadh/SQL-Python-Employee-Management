@@ -5,18 +5,11 @@ m=mysql.connector.connect(
     password="101285",
     database="assignment"
 )
-#c=m.cursor()
+c=m.cursor()
 #c.execute("create table emplrec(name varchar(50) primary key not null,age int,salary int)")#
 #m.commit()
 #c.close()
 def list_emp():
-    m = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="101285",
-        database="assignment"
-    )
-    c=m.cursor()
     c.execute("Select * from emplrec")
     rows=c.fetchall()
     print("Name     Age     Salary")
@@ -24,46 +17,21 @@ def list_emp():
         for col in rows:
             print(col,end='      ')
         print()
-    c.close()
 def add_emp(name,age,sal):
-    m = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="101285",
-        database="assignment"
-    )
-    c=m.cursor()
     s="insert into emplrec(name,age,salary)values(%s,%s,%s)"
     v=[(nm,ag,sal)]
     c.executemany(s, v)
     m.commit()
-    m.close()
 def edit_emp(n,n_n,n_a,n_s):
-    m = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="101285",
-        database="assignment"
-    )
-    c=m.cursor()
     s=("update emplrec set name=%s,age=%s,salary=%s where name=%s")
     val=[(n_n,n_a,n_s,n)]
     c.executemany(s,val)
     m.commit()
-    m.close()
 def del_emp(n):
-    m = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="101285",
-        database="assignment"
-    )
-    c=m.cursor()
     s=("delete from emplrec where name=%s")
     val=[(n,)]
     c.executemany(s,val)
     m.commit()
-    m.close()
 ch=1
 while(ch<5):
     print("\n1.List\n2.Add\n3.Edit\n4.Delete\n5.Exit\n")
